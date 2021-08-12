@@ -6,6 +6,7 @@ import (
 	"log"
 	"mycache/geecache"
 	"net/http"
+	"os"
 )
 
 var db = map[string]string{
@@ -54,9 +55,11 @@ func startAPIServer(apiAddr string, gee *geecache.Group) {
 func main() {
 	var port int
 	var api bool
+	flag.Parse()
+	var commandLine = flag.NewFlagSet(os.Args[0], flag.ExitOnError)
+	commandLine.Parse(os.Args[1:])
 	flag.IntVar(&port, "port", 8001, "Geecache server port")
 	flag.BoolVar(&api, "api", false, "Start a api server?")
-	flag.Parse()
 
 	apiAddr := "http://localhost:9999"
 	addrMap := map[int]string{
