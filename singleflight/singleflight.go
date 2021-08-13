@@ -34,6 +34,5 @@ func (g *Group) Do(key string, fn func() (interface{}, error)) (interface{}, err
 	g.mu.Lock()
 	delete(g.m, key)
 	g.mu.Unlock()
-
 	return c.val, c.err
 }
